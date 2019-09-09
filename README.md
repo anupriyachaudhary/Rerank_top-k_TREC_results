@@ -1,22 +1,31 @@
-REQUIREMENTS:
+# Reranking TREC data using Learn-to-Rank algorithms
+## Problem statement
+This project will be an exploration of state-of-the-art in the area of ad hoc information retrieval (IR) i.e. the task of finding documents “similar to” a text query.
+Traditional ranking models/functions tend to rely on a few relevance signals like term frequency (tf), document frequency (df) and document length but they ignores many possibly relevant features. During the course of this project, I aim to generate more sophisticated features such as word embedding similarity, proximity measure etc for given documents.Further, state-of-the-art learning-to-rank algorithm will be used to combine these potentially relevant features to determine their relative importance and create a new ranking model.
+The ultimate goal of this project is to achieve reranking of top-k retrieved results and achieve high NDCG@10 scores for the TREC dataset.
+
+#### Dataset: TREC-8 (disk 4 and 5) which consists of document collection, query set, and relevance judgments for evaluation.
+#### Test/evaluation metrics: NDCG@10
+
+## REQUIREMENTS:
 This project needs access to lines-trec45.txt, qrels.trec6-8.nocr, title-queries.301-450 which needs to be supplied by the user. 
 Download and extract the latest Lucene distribution. Copy three JARs: the LuceneCore JAR, the queryparser JAR, and the common analysis JAR and place all the files in the ‘lib’ folder.
 Download standalone program RankLib.jar and put it in the bin folder in working directory
 
 FILES & FOLDERS:
-(1) 1doclen_ext.py: extracts length of each doc in the query relevance file from index. Output for this script is input for 3feature_ext.py
-(2) 2doclen_ext_bm25.py: extracts length of each doc in the ranked list (for a test query, query.txt) to be re-ranked by LTR model. Output for this script is input for 3feature_ext.py
-(3) 3feature_ext.py: produces training data by extracting feature values for each query-doc pair in relevance judgement file from index
-(4) 4rerank.py: reranks the ranked documents (ranked by BM25 similarity) for test query
-(5) 5feature_ext_proximity.py: produce 5 training files corresponding to each proximity measure + 18 common features for each query-doc pair in relevance judgement file from index
-(6) 6parser.py: code to covert lines-trec45.txt to xml file (the format accepted by lucene)
-(7) src: code built on top of Lucene to index a collection, run a set of queries and inspect Lucene indexes
-(8) build.xml: build file to build the project.
-(9) test-data: contains 4 files
-     -title-queries.301-450: TREC search topics.
-     -qrels.trec6-8.nocr: correct(and incorrect) answers for each topic (Gold standard).
-     -2 test files for re-ranking part of the project. query.txt contains one query and qrels.nocr contains relevance judgement for given query.
-(10) trec_eval: executable file which compares a ranked list of output with Gold standard to give a set of quality measures (like MAP, ndcg etc.).
+- 1doclen_ext.py: extracts length of each doc in the query relevance file from index. Output for this script is input for 3feature_ext.py
+- 2doclen_ext_bm25.py: extracts length of each doc in the ranked list (for a test query, query.txt) to be re-ranked by LTR model. Output for this script is input for 3feature_ext.py
+- 3feature_ext.py: produces training data by extracting feature values for each query-doc pair in relevance judgement file from index
+- 4rerank.py: reranks the ranked documents (ranked by BM25 similarity) for test query
+- 5feature_ext_proximity.py: produce 5 training files corresponding to each proximity measure + 18 common features for each query-doc pair in relevance judgement file from index
+- 6parser.py: code to covert lines-trec45.txt to xml file (the format accepted by lucene)
+- src: code built on top of Lucene to index a collection, run a set of queries and inspect Lucene indexes
+- build.xml: build file to build the project.
+- test-data: contains 4 files
+     - title-queries.301-450: TREC search topics.
+     - qrels.trec6-8.nocr: correct(and incorrect) answers for each topic (Gold standard).
+     - 2 test files for re-ranking part of the project. query.txt contains one query and qrels.nocr contains relevance judgement for given query.
+- trec_eval: executable file which compares a ranked list of output with Gold standard to give a set of quality measures (like MAP, ndcg etc.).
 
 
 -------------------------------------------------------------------------------
