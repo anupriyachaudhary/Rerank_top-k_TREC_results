@@ -70,8 +70,6 @@ Test Instructions:
 (3) For each document in the output file from step (2), get the scores obtained by LTR model using following command with RankLib
 	$ java -jar bin/RankLib.jar -load /path/to/model -rank path/to/rerank-data.txt -score /path/to/myscorefile.txt
 
-    The output file myscorefile.txt provides the score that the ranker assigns to each of the documents. 
-
 (4) To obtain re-ranked top-k results, simply sort the documents according to calculated score by running following script:
 	$ python 4rerank.py /path/to/bm25.out /path/to/newscore.out
 
